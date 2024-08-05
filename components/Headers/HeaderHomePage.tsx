@@ -6,9 +6,9 @@ import {
   useLocalSearchParams,
 } from "expo-router";
 import { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Button, Pressable, StyleSheet, Text, View } from "react-native";
 
-export interface IHeaderHomePageProps {}
+export interface IHeaderHomePageProps { }
 
 export default function HeaderHomePage(props: IHeaderHomePageProps) {
   const [renderPage, setRenderPage] = useState(0);
@@ -19,9 +19,9 @@ export default function HeaderHomePage(props: IHeaderHomePageProps) {
     <View style={styles.header}>
       <Ionicons name="reorder-three-outline" size={25} color="white" />
       <Link href={""}>
-        <View>
+        <Pressable onPress={() => setRenderPage(0)}>
           <Text
-            onPress={() => setRenderPage(0)}
+
             style={[styles.title, renderPage === 0 && { fontWeight: "900" }]}
           >
             Bạn bè
@@ -35,12 +35,12 @@ export default function HeaderHomePage(props: IHeaderHomePageProps) {
               marginTop: 4,
             }}
           />
-        </View>
+        </Pressable>
       </Link>
       <Link href="">
-        <View>
+        <Pressable onPress={() => setRenderPage(1)}>
           <Text
-            onPress={() => setRenderPage(1)}
+
             style={[styles.title, renderPage === 1 && { fontWeight: "900" }]}
           >
             Đang Follow
@@ -54,12 +54,11 @@ export default function HeaderHomePage(props: IHeaderHomePageProps) {
               marginTop: 4,
             }}
           />
-        </View>
+        </Pressable>
       </Link>
       <Link href="">
-        <View>
+        <Pressable onPress={() => setRenderPage(2)}>
           <Text
-            onPress={() => setRenderPage(2)}
             style={[styles.title, renderPage === 2 && { fontWeight: "900" }]}
           >
             Dành cho bạn
@@ -73,7 +72,7 @@ export default function HeaderHomePage(props: IHeaderHomePageProps) {
               marginTop: 4,
             }}
           />
-        </View>
+        </Pressable>
       </Link>
       <Ionicons name="search-outline" size={17} color="white" />
     </View>
@@ -83,7 +82,7 @@ export default function HeaderHomePage(props: IHeaderHomePageProps) {
 const styles = StyleSheet.create({
   header: {
     width: "100%",
-    height: 80,
+    height: 90,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
