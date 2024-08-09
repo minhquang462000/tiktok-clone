@@ -12,9 +12,10 @@ export default function TabLayout() {
         tabBarLabelStyle: {
           fontSize: 8,
           marginBottom: 4,
+          backgroundColor: "none",
         },
         headerShown: false,
-        tabBarStyle: { backgroundColor: "#121212", borderTopWidth: 0 },
+        tabBarStyle: { borderTopWidth: 0, backgroundColor: "none" },
       }}
     >
       <Tabs.Screen

@@ -5,5 +5,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 export interface IRightSideBarProps {}
 
 export default function RightSideBarHome(props: IRightSideBarProps) {
-  return <Tabs screenOptions={{ tabBarLabelPosition: "beside-icon" }}></Tabs>;
+  return <Tabs screenOptions={{ tabBarLabelPosition: "beside-icon" }}>
+    
+  </Tabs>;
 }

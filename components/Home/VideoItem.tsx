@@ -1,31 +1,39 @@
 import { IVideo } from "@/data.video";
 import { ResizeMode, Video } from "expo-av";
 import { useEffect, useRef, useState } from "react";
-import { Button, StyleSheet, View } from "react-native";
-export default function VideoItem({ item }: { item: IVideo }) {
-  const ref = useRef(null);
-  const [status, setStatus] = useState({});
+import { Button, StatusBar, StyleSheet, View } from "react-native";
+import { WINDOW_HEIGHT, WINDOW_WIDTH } from '@/utils';
+import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
+interface IVideoItemProps {
+  data: IVideo;
+  isActive: boolean;
+}
+export default function VideoItem({ data, isActive }: IVideoItemProps) {
+  const video = useRef<any>(null);
+  const [status, setStatus] = useState(true);
+
+  const statusBarHeight = StatusBar.currentHeight || 0;
+  // const bottomTabHeight = useBottomTabBarHeight();
 
   return (
-    <View style={[styles.videoContainer]}>
+    <View style={[styles.container, { height: WINDOW_HEIGHT  - statusBarHeight },]}>
+      <StatusBar barStyle={'light-content'} />
       <Video
-        ref={ref}
+        ref={video}
         style={styles.video}
         source={{
-          uri: "https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4",
+          uri: data?.uri,
         }}
         useNativeControls
         resizeMode={ResizeMode.CONTAIN}
         isLooping
-        onPlaybackStatusUpdate={(status) => setStatus(() => status)}
+        onPlaybackStatusUpdate={(status) => setStatus(!status)}
       />
       {/* <View style={styles.buttons}>
         <Button
-          title={status ? "Pause" : "Play"}
+          title={status ? 'Pause' : 'Play'}
           onPress={() =>
-            status.isPlaying
-              ? video.current.pauseAsync()
-              : video.current.playAsync()
+            status ? video.current.pauseAsync() : video.current.playAsync()
           }
         />
       </View> */}
@@ -34,14 +42,13 @@ export default function VideoItem({ item }: { item: IVideo }) {
 }
 
 const styles = StyleSheet.create({
-  videoContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+  container: {
+    width: WINDOW_WIDTH,
   },
   video: {
-    width: "100%",
-    height: "100%",
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
   },
   buttons: {},
 });
